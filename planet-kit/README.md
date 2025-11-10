@@ -14,7 +14,8 @@ LINE Planet is a cloud-based real-time communications platform as a service (CPa
 - npm or yarn
 - Supported browser
   - Chromium 72+ based browser
-  - Safari 14.5+ (beta)
+  - Safari 16.4+ (beta)
+  - WebView (beta)
 
 ### Installing via NPM
 
@@ -63,14 +64,16 @@ After downloading the SDK, the method for integrating the WebPlanetKit SDK into 
 After including the SDK, you can use it in your Javascript code as follows.
 
 ```javascript
-<script type="text/javascript">const planetKit = new PlanetKit.Conference();</script>
+<script type="text/javascript">
+  const planetKit = new PlanetKit.Conference();
+</script>
 ```
 
 ## API Reference
 
 For detailed information on APIs, please refer to the following documents.
 
-[API Reference](https://docs.lineplanet.me/api-reference/client/web/5.3/index.html)
+[API Reference](https://docs.lineplanet.me/api-reference/client/web/latest/index.html)
 
 ## Issues and Inquiries
 

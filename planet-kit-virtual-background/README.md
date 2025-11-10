@@ -15,7 +15,7 @@ The virtual background feature applies effects to the background of the video st
 - Supported browser
   - Chromium 72+ based browser
 - Limitations
-  - Virtual background is not supported in Safari browsers.
+  - Virtual background is only supported in Chrome browsers.
 
 ### Installing via NPM
 
@@ -152,7 +152,7 @@ Then, the ML model files in path are used at runtime.
 
 For detailed information on APIs, please refer to the following documents.
 
-[API Reference](https://docs.lineplanet.me/api-reference/client/web/5.3/index.html)
+[API Reference](https://docs.lineplanet.me/api-reference/client/web/latest/index.html)
 
 ## Issues and Inquiries
 
