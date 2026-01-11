@@ -34,6 +34,10 @@ try {
         $ErrorActionPreference = $oldErrorAction
         
         if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq 1) {
+            $rootDirEscaped = [regex]::Escape($rootDir)
+            $diff = $diff | ForEach-Object {
+                $_ -replace $rootDirEscaped, ""
+            }
             $diff | Out-File -FilePath $outputFile -Encoding UTF8
             Write-Host "Diff saved to $outputFile."
             
