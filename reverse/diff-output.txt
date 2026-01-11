@@ -1,0 +1,331 @@
+﻿diff --git "a/C:\\Users\\yun40\\Desktop\\planet-kit-web-reverse\\planet-kit\\dist\\planet-kit-eval.js" "b/C:\\Users\\yun40\\Desktop\\planet-kit-web-reverse\\planet-kit\\dist\\planet-kit.js"
+index 672eb59..f080331 100644
+--- "a/C:\\Users\\yun40\\Desktop\\planet-kit-web-reverse\\planet-kit\\dist\\planet-kit-eval.js"
++++ "b/C:\\Users\\yun40\\Desktop\\planet-kit-web-reverse\\planet-kit\\dist\\planet-kit.js"
+@@ -13713,7 +13713,7 @@
+                           : e._maxListeners;
+                       }
+                       function u(e, t, r, n) {
+-                        var i, o, a, u;
++                        var i, o, a;
+                         if (
+                           (s(r),
+                           void 0 === (o = e._events)
+@@ -13739,19 +13739,18 @@
+                           (i = c(e)) > 0 && a.length > i && !a.warned)
+                         ) {
+                           a.warned = !0;
+-                          var l = new Error(
++                          var u = new Error(
+                             "Possible EventEmitter memory leak detected. " +
+                               a.length +
+                               " " +
+                               String(t) +
+                               " listeners added. Use emitter.setMaxListeners() to increase limit",
+                           );
+-                          ((l.name = "MaxListenersExceededWarning"),
+-                            (l.emitter = e),
+-                            (l.type = t),
+-                            (l.count = a.length),
+-                            (u = l),
+-                            console && console.warn && console.warn(u));
++                          ((u.name = "MaxListenersExceededWarning"),
++                            (u.emitter = e),
++                            (u.type = t),
++                            (u.count = a.length),
++                            console && console.warn);
+                         }
+                         return e;
+                       }
+@@ -14889,16 +14888,9 @@
+                         }
+                         switch (e) {
+                           case i.error:
+-                            console.error(n);
+-                            break;
+                           case i.warn:
+-                            console.warn(n);
+-                            break;
+                           case i.log:
+-                            console.log(n);
+-                            break;
+                           case i.debug:
+-                            console.debug(n);
+                         }
+                       }
+                     }
+@@ -17068,9 +17060,7 @@
+                       (h.hexChars = "0123456789abcdef"),
+                       (h.hexOut = []),
+                       (h.onePassHasher = new h()),
+-                      "5d41402abc4b2a76b9719d911017c592" !==
+-                        h.hashStr("hello") &&
+-                        console.error("Md5 self test failed."));
++                      h.hashStr("hello"));
+                     const f = {
+                       100: "Trying",
+                       180: "Ringing",
+@@ -28906,28 +28896,15 @@
+                           {
+                             key: "playVideo",
+                             value: function (e) {
+-                              var t = this;
+                               this.videoView &&
+                                 ((this.videoView.srcObject = this.mediaStream),
+                                 (this.videoView.muted = !0),
+                                 this.videoView
+                                   .play()
+                                   .then(function () {
+-                                    (e && e.delegate && e.delegate.onPlayed(),
+-                                      console.debug(
+-                                        "".concat(
+-                                          t.sdpMid,
+-                                          " play screen share...",
+-                                        ),
+-                                      ));
++                                    e && e.delegate && e.delegate.onPlayed();
+                                   })
+-                                  .catch(function (e) {
+-                                    return console.warn(
+-                                      "Fail to play "
+-                                        .concat(t.sdpMid, " video - ")
+-                                        .concat(e.message),
+-                                    );
+-                                  }));
++                                  .catch(function (e) {}));
+                             },
+                           },
+                           {
+@@ -29637,31 +29614,25 @@
+                             key: "gatherStats",
+                             value: function () {
+                               var e = this;
+-                              (console.log("start gatherStats"),
+-                                this.parseStats(this.targetStatTypeList)
+-                                  .then(function (t) {
+-                                    t &&
+-                                      (e.outgoingBandwidth.addPoint(
+-                                        t[wr.CANDIDATE_PAIR]
+-                                          .availableOutgoingBitrate,
+-                                      ),
++                              this.parseStats(this.targetStatTypeList)
++                                .then(function (t) {
++                                  t &&
++                                    (e.outgoingBandwidth.addPoint(
+                                       t[wr.CANDIDATE_PAIR]
+-                                        .availableIncomingBitrate &&
+-                                        e.incomingBandwidth.addPoint(
+-                                          t[wr.CANDIDATE_PAIR]
+-                                            .availableIncomingBitrate,
+-                                        ),
+-                                      setTimeout(
+-                                        e.gatherStats.bind(e),
+-                                        e.interval,
+-                                      ));
+-                                  })
+-                                  .catch(function (e) {
+-                                    (console.warn(
+-                                      "range statistic test - catch error",
++                                        .availableOutgoingBitrate,
+                                     ),
+-                                      console.log(e));
+-                                  }));
++                                    t[wr.CANDIDATE_PAIR]
++                                      .availableIncomingBitrate &&
++                                      e.incomingBandwidth.addPoint(
++                                        t[wr.CANDIDATE_PAIR]
++                                          .availableIncomingBitrate,
++                                      ),
++                                    setTimeout(
++                                      e.gatherStats.bind(e),
++                                      e.interval,
++                                    ));
++                                })
++                                .catch(function (e) {});
+                             },
+                           },
+                           {
+@@ -31707,13 +31678,7 @@
+                                   this.remoteVideoElement &&
+                                     ((this.remoteVideoElement.srcObject = null),
+                                     this.remoteVideoElement.pause()));
+-                              } catch (e) {
+-                                console.warn(
+-                                  "Release remoteStream has warn - ".concat(
+-                                    e.message,
+-                                  ),
+-                                );
+-                              }
++                              } catch (e) {}
+                             },
+                           },
+                         ]) &&
+@@ -37899,11 +37864,7 @@
+                                             (t = e + "visibilitychange");
+                                         },
+                                       ),
+-                                  t
+-                                    ? document.addEventListener(t, e, !1)
+-                                    : console.error(
+-                                        "Browser not support vicibilityChange EventListner",
+-                                      ));
++                                  t && document.addEventListener(t, e, !1));
+                               },
+                             },
+                             {
+@@ -38798,9 +38759,7 @@
+                                             (e.next = 18));
+                                           break;
+                                         case 15:
+-                                          ((e.prev = 15),
+-                                            (e.t0 = e.catch(0)),
+-                                            console.error(e.t0));
++                                          ((e.prev = 15), (e.t0 = e.catch(0)));
+                                         case 18:
+                                         case "end":
+                                           return e.stop();
+@@ -46629,10 +46588,6 @@
+                                             return (
+                                               (e.prev = 15),
+                                               (e.t0 = e.catch(2)),
+-                                              console.error(
+-                                                "Error setting up device permissions:",
+-                                                e.t0,
+-                                              ),
+                                               e.abrupt("return", !1)
+                                             );
+                                           case 19:
+@@ -46945,10 +46900,6 @@
+                                               throw (
+                                                 (e.prev = 15),
+                                                 (e.t0 = e.catch(4)),
+-                                                console.warn(
+-                                                  "Error getting audio stream.",
+-                                                  e.t0.message,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 19:
+@@ -47043,10 +46994,6 @@
+                                               throw (
+                                                 (e.prev = 17),
+                                                 (e.t0 = e.catch(4)),
+-                                                console.warn(
+-                                                  "Error getting video stream.",
+-                                                  e.t0.message,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 21:
+@@ -47133,27 +47080,17 @@
+                                                 (this.mediaStream =
+                                                   new MediaStream()),
+                                                 this.audioStream &&
+-                                                this.audioStream.getAudioTracks()
+-                                                  .length > 0
+-                                                  ? ((o =
+-                                                      this.audioStream.getAudioTracks()[0]),
+-                                                    this.mediaStream.addTrack(
+-                                                      o,
+-                                                    ))
+-                                                  : console.warn(
+-                                                      "No audio tracks available in audioStream.",
+-                                                    ),
++                                                  this.audioStream.getAudioTracks()
++                                                    .length > 0 &&
++                                                  ((o =
++                                                    this.audioStream.getAudioTracks()[0]),
++                                                  this.mediaStream.addTrack(o)),
+                                                 this.videoStream &&
+-                                                this.videoStream.getVideoTracks()
+-                                                  .length > 0
+-                                                  ? ((a =
+-                                                      this.videoStream.getVideoTracks()[0]),
+-                                                    this.mediaStream.addTrack(
+-                                                      a,
+-                                                    ))
+-                                                  : console.warn(
+-                                                      "No video tracks available in videoStream.",
+-                                                    ),
++                                                  this.videoStream.getVideoTracks()
++                                                    .length > 0 &&
++                                                  ((a =
++                                                    this.videoStream.getVideoTracks()[0]),
++                                                  this.mediaStream.addTrack(a)),
+                                                 e.abrupt(
+                                                   "return",
+                                                   this.mediaStream,
+@@ -47163,7 +47100,6 @@
+                                               throw (
+                                                 (e.prev = 25),
+                                                 (e.t2 = e.catch(1)),
+-                                                console.warn(e.t2.message),
+                                                 e.t2
+                                               );
+                                             case 29:
+@@ -47344,11 +47280,7 @@
+                                               r());
+                                           })
+                                           .catch(function (e) {
+-                                            (console.warn(
+-                                              "Fail to play on new video element",
+-                                              e,
+-                                            ),
+-                                              n(e));
++                                            n(e);
+                                           }))
+                                       : r());
+                                 });
+@@ -47463,10 +47395,6 @@
+                                               throw (
+                                                 (e.prev = 7),
+                                                 (e.t0 = e.catch(0)),
+-                                                console.warn(
+-                                                  "Error accessing media devices.",
+-                                                  e.t0,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 11:
+@@ -47514,10 +47442,6 @@
+                                               throw (
+                                                 (e.prev = 8),
+                                                 (e.t0 = e.catch(0)),
+-                                                console.warn(
+-                                                  "Error accessing media devices.",
+-                                                  e.t0,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 12:
+@@ -47565,10 +47489,6 @@
+                                               throw (
+                                                 (e.prev = 8),
+                                                 (e.t0 = e.catch(0)),
+-                                                console.warn(
+-                                                  "Error accessing media devices.",
+-                                                  e.t0,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 12:
+@@ -47616,10 +47536,6 @@
+                                               throw (
+                                                 (e.prev = 8),
+                                                 (e.t0 = e.catch(0)),
+-                                                console.warn(
+-                                                  "Error accessing media devices.",
+-                                                  e.t0,
+-                                                ),
+                                                 e.t0
+                                               );
+                                             case 12:
+@@ -48205,7 +48121,7 @@
+             EVAL: "EVAL",
+             PROD: "PROD",
+           }),
+-          g = p.EVAL,
++          g = p.PROD,
+           v = "5.5.1",
+           m =
+             (r(9601),
